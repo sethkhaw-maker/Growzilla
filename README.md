@@ -59,9 +59,11 @@ Controls:
 Phase 1 - Growth Phase
 
 Z Button: Move the dispenser to the left.
+
 V Button: Move the dispenser to the right.
 
 Phase 2 - Rampage Phase
 
 Z Button: Activate Ability 1.
+
 V Button: Activate Ability 2.
