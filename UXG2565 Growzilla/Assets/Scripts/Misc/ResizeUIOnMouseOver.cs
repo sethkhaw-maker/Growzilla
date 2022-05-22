@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-// Simple script that resizes the UI on mouseover, mainly used for all of the buttons and the main cookie.
 [RequireComponent(typeof(RectTransform))]
 public class ResizeUIOnMouseOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
