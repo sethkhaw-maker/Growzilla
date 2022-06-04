@@ -31,7 +31,7 @@ public partial class DataHandler : MonoBehaviour
         }
     }
     // ----------------------------------------------------------------
-    private void GetCacheData()
+    public void GetCacheData()
     {
         string cachePath = Application.dataPath + "/Resources/CacheData.json";
 
@@ -45,21 +45,30 @@ public partial class DataHandler : MonoBehaviour
             ResetCacheData();
         }
     }
-    private void ResetCacheData()
+    public void ResetCacheData()
     {
         cacheData = new CacheData();
         string cacheJson = JsonUtility.ToJson(cacheData, true);
         string cachePath = Application.dataPath + "/Resources/CacheData.json";
         File.WriteAllText(cachePath, cacheJson);
     }
-    private void UpdateCacheData()
+    public void UpdateCacheData()
     {
         string cacheJson = JsonUtility.ToJson(cacheData, true);
         string cachePath = Application.dataPath + "/Resources/CacheData.json";
         File.WriteAllText(cachePath, cacheJson);
     }
+    public CacheData ReadCacheData()
+    {
+        if (this.cacheData == null) { GetCacheData(); }
+        return this.cacheData;
+    }
+    public void InputCacheData(CacheData InputData)
+    {
+        this.cacheData = InputData;
+    }
     // ----------------------------------------------------------------
-    private void GetHighscore()
+    public void GetHighscore()
     {
         string dynPath = Application.dataPath + "/Resources/ScoreData.json";
 
@@ -73,7 +82,7 @@ public partial class DataHandler : MonoBehaviour
             ResetHighScore();
         }
     }
-    private void ResetHighScore()
+    public void ResetHighScore()
     {
         scoreData = new DynamicData();
 
@@ -87,7 +96,7 @@ public partial class DataHandler : MonoBehaviour
         string dynPath = Application.dataPath + "/Resources/ScoreData.json";
         File.WriteAllText(dynPath, dynJson);
     }
-    private void UpdateHighscore()
+    public void UpdateHighscore()
     {
         if (scoreData.Highscore.Count > 0) { scoreData.Highscore.Sort(); }
 
@@ -95,37 +104,4 @@ public partial class DataHandler : MonoBehaviour
         string dynPath = Application.dataPath + "/Resources/ScoreData.json";
         File.WriteAllText(dynPath, dynJson);
     }
-}
-
-
-public partial class DataHandler : MonoBehaviour
-{
-    public void OnMainMenuEnter()
-    {
-        ResetCacheData();
-    }
-    public void OnMainMenuExit()
-    {
-        ResetCacheData();
-    }
-    // ----------------------------------------------------------------
-    public void OnGrowStageEnter()
-    {
-        ResetCacheData();
-    }
-    public void OnGrowStageExit()
-    {
-        UpdateCacheData();
-    }
-    // ----------------------------------------------------------------
-    public void OnRampageStageEnter()
-    {
-
-    }
-    public void OnRampageStageExit()
-    {
-        UpdateHighscore();
-        ResetCacheData();
-    }
-    // ----------------------------------------------------------------
 }
