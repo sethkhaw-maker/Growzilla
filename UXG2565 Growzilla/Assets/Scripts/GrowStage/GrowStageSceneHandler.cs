@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GrowStageSceneHandler : MonoBehaviour
@@ -11,6 +12,11 @@ public class GrowStageSceneHandler : MonoBehaviour
     [SerializeField] GameObject MainMenuCanvas = null;
     [SerializeField] GameObject ScreenFader = null;
     [SerializeField] GameObject BottomFloor = null;
+    [SerializeField] GameObject BottomFloorSpriteLeft = null;
+    [SerializeField] GameObject BottomFloorSpriteRight = null;
+    [SerializeField] GameObject AndroidButtonA = null;
+    [SerializeField] GameObject AndroidButtonB = null;
+    [SerializeField] Text TimeLeftBeforeAttack = null;
 
     [Header("Adjustable Values")]
     [SerializeField] float GrowStageFoodSpawnBuffer = 3.0f;
@@ -93,6 +99,8 @@ public class GrowStageSceneHandler : MonoBehaviour
                 GO.GetComponent<Animator>().enabled = true;
             }
         }
+
+        TimeLeftBeforeAttack.text = (GrowStageTimeLimit).ToString();
     }
     // Call using Animation Events
     public void OnTransitionReachedKaijuuSpawn()
@@ -107,6 +115,8 @@ public class GrowStageSceneHandler : MonoBehaviour
     {
         // 1. Enable chute control.
         FoodChuteControlEnabled = true;
+        AndroidButtonA.SetActive(true);
+        AndroidButtonB.SetActive(true);
 
         // 2. Enable Kaijuu Movement.
         this.gameObject.GetComponent<GrowStageKaijuuHandler>().OnKaijuuMovementEnabled();
@@ -140,9 +150,10 @@ public class GrowStageSceneHandler : MonoBehaviour
     {
         for (int i = 0; i < GrowStageTimeLimit; i++)
         {
-            Debug.Log("Grow Stage Time Left: " + (GrowStageTimeLimit - i));
-            //Debug.Log("i: " + i);
-            //Debug.Log("GrowStageTimeLimit");
+            // Debug.Log("Grow Stage Time Left: " + (GrowStageTimeLimit - i));
+            TimeLeftBeforeAttack.text = (GrowStageTimeLimit - i).ToString();
+            // Debug.Log("i: " + i);
+            // Debug.Log("GrowStageTimeLimit");
             yield return new WaitForSeconds(1);
         }
 
@@ -152,13 +163,19 @@ public class GrowStageSceneHandler : MonoBehaviour
     {
         StopCoroutine(GrowTimerCoroutine());
 
+        // Display time's up.
+        TimeLeftBeforeAttack.text = "0";
+
         // 1. Disable Food Spawn.
         FoodSpawnEnabled = false;
 
         // 2. Disable Kaijuu Movement.
         this.gameObject.GetComponent<GrowStageKaijuuHandler>().OnGrowStageTimeEnd();
 
-        // 3. Spawn Name Input Panel.
+        // 3. Disable Chute Control
+        FoodChuteControlEnabled = false;
+
+        // 4. Spawn Name Input Panel.
         if (NamePanelReference != null) NamePanelReference.SetActive(true);
     }
     // Call using Unity Button Events
@@ -169,6 +186,8 @@ public class GrowStageSceneHandler : MonoBehaviour
 
         // 2. Let the Kaijuu fall through the floor.
         if (BottomFloor != null) BottomFloor.SetActive(false);
+        if (BottomFloorSpriteLeft != null) BottomFloorSpriteLeft.GetComponent<Animator>().enabled = true;
+        if (BottomFloorSpriteRight != null) BottomFloorSpriteRight.GetComponent<Animator>().enabled = true;
 
         StartCoroutine(SceneFadeCoroutine());
     }

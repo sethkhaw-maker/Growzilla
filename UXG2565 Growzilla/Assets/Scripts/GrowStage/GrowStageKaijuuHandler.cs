@@ -208,7 +208,7 @@ public class GrowStageKaijuuHandler : MonoBehaviour
             new Vector3(
                 KaijuuObject.transform.position.x,
                 KaijuuObject.transform.position.y,
-                2500.0f
+                50f
                     );
     }
 

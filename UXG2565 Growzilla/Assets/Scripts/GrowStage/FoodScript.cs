@@ -27,6 +27,11 @@ public class FoodScript : MonoBehaviour
         Sprites[SpriteType - 1].GetComponent<SpriteRenderer>().color = new Color(FoodColor.x, FoodColor.y, FoodColor.z, 1.0f);
 
     }
+    void Update()
+    {
+        this.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, Time.timeSinceLevelLoad * -360.0f));
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Kaijuu"))
