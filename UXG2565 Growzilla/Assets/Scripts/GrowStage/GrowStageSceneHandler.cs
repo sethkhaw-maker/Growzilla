@@ -7,7 +7,7 @@ public class GrowStageSceneHandler : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] GameObject KaijuuReference = null;
-    [SerializeField] GameObject ChuteReference = null;
+    [SerializeField] public GameObject ChuteReference = null;
     [SerializeField] GameObject NamePanelReference = null;
     [SerializeField] GameObject MainMenuCanvas = null;
     [SerializeField] GameObject ScreenFader = null;
@@ -33,6 +33,7 @@ public class GrowStageSceneHandler : MonoBehaviour
     bool FoodChuteControlEnabled = false;
     bool FoodSpawnEnabled = false;
     float FoodSpawnTimer = 0.0f;
+    float TimeLeft = 0.0f;
 
     // ----------------------------------------------------------
 
@@ -41,6 +42,8 @@ public class GrowStageSceneHandler : MonoBehaviour
         FoodChuteControlEnabled = false;
         FoodSpawnEnabled = false;
         FoodSpawnTimer = FoodSpawnDelay;
+        FoodFactory.Instance.ChuteSpawnLocation = ChuteReference;
+        TimeLeft = GrowStageTimeLimit;
     }
 
     void Update()
@@ -63,8 +66,12 @@ public class GrowStageSceneHandler : MonoBehaviour
     {
         if (!FoodSpawnEnabled) { return; }
         if (FoodSpawnTimer > 0.0f) { FoodSpawnTimer -= Time.deltaTime; return; }
-        Vector3 FoodSpawnPos = new Vector3(ChuteReference.transform.position.x, ChuteReference.transform.position.y - 1.5f, 0.0f);
-        Instantiate(FoodObjectPrefab, FoodSpawnPos, Quaternion.identity);
+
+        // Vector3 FoodSpawnPos = new Vector3(ChuteReference.transform.position.x, ChuteReference.transform.position.y - 1.5f, 0.0f);
+        // Instantiate(FoodObjectPrefab, FoodSpawnPos, Quaternion.identity);
+
+        FoodFactory.Instance.SpawnFood(FoodFactory.Instance.ConveyorSpawnLocation.transform.position);
+
         FoodSpawnTimer = FoodSpawnDelay;
     }
     public void MoveChuteLeft()
@@ -131,6 +138,7 @@ public class GrowStageSceneHandler : MonoBehaviour
         for (int i = 0; i < GrowStageFoodSpawnBuffer; i++)
         {
             Debug.Log("Delay Time Left: " + (GrowStageFoodSpawnBuffer - i));
+            TimeLeft = (float)(GrowStageFoodSpawnBuffer - i);
             yield return new WaitForSeconds(1);
         }
         
@@ -168,6 +176,7 @@ public class GrowStageSceneHandler : MonoBehaviour
 
         // 1. Disable Food Spawn.
         FoodSpawnEnabled = false;
+        FoodFactory.Instance.DisableFactory();
 
         // 2. Disable Kaijuu Movement.
         this.gameObject.GetComponent<GrowStageKaijuuHandler>().OnGrowStageTimeEnd();

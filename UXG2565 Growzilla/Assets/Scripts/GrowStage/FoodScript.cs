@@ -3,40 +3,58 @@
 public class FoodScript : MonoBehaviour
 {
     [SerializeField] GameObject[] Sprites = new GameObject[9];
-    [HideInInspector] public int FoodType = 1;
-    [HideInInspector] public int SpriteType = 1;
-    [HideInInspector] public Vector3 FoodColor = new Vector3(0, 0, 0);
+    [HideInInspector ]public float moveSpeed = 0.0f;
 
-    void Awake()
-    {
-        SpriteType = Random.Range(1, 10);
-        FoodType = (SpriteType % 3 == 0)? 3: SpriteType % 3;
-        int ColorType = Random.Range(1, 8);
-        switch (ColorType)
-        {
-            case 1: FoodColor = new Vector3(1.0f, 0.0f, 0.0f); break;
-            case 2: FoodColor = new Vector3(0.0f, 1.0f, 0.0f); break;
-            case 3: FoodColor = new Vector3(0.0f, 0.0f, 1.0f); break;
-            case 4: FoodColor = new Vector3(1.0f, 1.0f, 0.0f); break;
-            case 5: FoodColor = new Vector3(0.0f, 1.0f, 1.0f); break;
-            case 6: FoodColor = new Vector3(1.0f, 0.0f, 1.0f); break;
-            case 7: FoodColor = new Vector3(1.0f, 1.0f, 1.0f); break;
-            // case 8: FoodColor = new Vector3(0.0f, 0.0f, 0.0f); break;
-        }
-        Sprites[SpriteType - 1].SetActive(true);
-        Sprites[SpriteType - 1].GetComponent<SpriteRenderer>().color = new Color(FoodColor.x, FoodColor.y, FoodColor.z, 1.0f);
+    public FoodData foodData = null;
+    public FoodObjectType objectType = FoodObjectType.Falling;
 
-    }
     void Update()
     {
-        this.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, Time.timeSinceLevelLoad * -360.0f));
+        if ((int)objectType == 2)
+        {
+            this.transform.rotation = Quaternion.Euler(0.0f, 0.0f, Time.timeSinceLevelLoad * 360.0f);
+        }
+    }
+
+    public void OnCreate()
+    {
+        Sprites[foodData.SpriteType - 1].SetActive(true);
+        Sprites[foodData.SpriteType - 1].GetComponent<SpriteRenderer>().color = new Color(foodData.FoodColor.x, foodData.FoodColor.y, foodData.FoodColor.z, 1.0f);
+
+        Vector2 m_velocity = ((int)objectType == 0) ? new Vector2(-1.0f, 0.0f) : ((int)objectType == 1) ? new Vector2(0.0f, 0.0f) : new Vector2(0.0f, -1.0f);
+        m_velocity *= moveSpeed;
+        this.GetComponent<Rigidbody2D>().velocity = m_velocity;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Kaijuu"))
         {
+            if (FoodFactory.Instance.FactoryIsEnabled == false) { Destroy(this.gameObject); return; }
+
             GrowStageKaijuuHandler.Instance.OnKaijuuEatFood(this);
+        }
+        if (other.gameObject.layer == LayerMask.NameToLayer("Destructor"))
+        {
+            if (other.gameObject.name == "FoodProcessor" && ((int)objectType == 0))
+            {
+                if (FoodFactory.Instance.FactoryIsEnabled == false) { Destroy(this.gameObject); return; }
+
+                if (FoodFactory.Instance.foodInChute != null)
+                {
+                    Vector3 FoodSpawnPos = 
+                        new Vector3(
+                            FoodFactory.Instance.ChuteSpawnLocation.transform.position.x,
+                            FoodFactory.Instance.ChuteSpawnLocation.transform.position.y - 1.5f,
+                            0.0f);
+
+                    FoodFactory.Instance.SpawnFood(FoodSpawnPos, FoodFactory.Instance.foodInChute);
+                    FoodFactory.Instance.foodInChute = null;
+                    Destroy(FoodFactory.Instance.foodInChuteObject);
+                }
+                FoodFactory.Instance.foodInChute = FoodFactory.Instance.SpawnFood(FoodFactory.Instance.ChuteDisplayLocation.transform.position, this.foodData, true);
+            }
+            if ((int)objectType != 1) { Destroy(this.gameObject); }
         }
     }
 }

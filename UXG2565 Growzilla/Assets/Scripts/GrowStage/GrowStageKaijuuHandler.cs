@@ -136,9 +136,9 @@ public class GrowStageKaijuuHandler : MonoBehaviour
         // 1. FoodEaten + 1.
         foodEaten++;
         // 2. AbilityGrowth[(int)Food.AbilityType] + 1.
-        AbilityGrowth[InputFood.FoodType - 1] += 1;
+        AbilityGrowth[InputFood.foodData.FoodType - 1] += 1;
         // 3. Color = Color / 5 * 4 + Food.Color / 5.
-        KaijuuColor = KaijuuColor / 10.0f * 9.0f + InputFood.FoodColor / 10.0f * 1.0f;
+        KaijuuColor = KaijuuColor / 10.0f * 8.0f + InputFood.foodData.FoodColor / 10.0f * 2.0f;
 
         // 4. Destroy Food
         Destroy(InputFood.gameObject);
