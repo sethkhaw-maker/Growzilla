@@ -8,6 +8,7 @@ public class GrowStageKaijuuHandler : MonoBehaviour
     [SerializeField] GameObject KaijuuObject = null;
     [SerializeField] GameObject[] KaijuuSizes = new GameObject[3];
     [SerializeField] SpriteRenderer[] AllColorableParts = new SpriteRenderer[1];
+    [SerializeField] UnityEngine.UI.Text KaijuuNameField = null;
 
     [Header("Evolution Threshold")]
     [SerializeField] int midEvolveAmount = 10;
@@ -210,6 +211,46 @@ public class GrowStageKaijuuHandler : MonoBehaviour
                 KaijuuObject.transform.position.y,
                 50f
                     );
+    }
+    public void OnRampageButtonPressed()
+    {
+        DataHandler.Instance.InputCacheData(ReturnKaijuuData());
+        DataHandler.Instance.UpdateCacheData();
+    }
+    public CacheData ReturnKaijuuData()
+    {
+        CacheData CurrentData = DataHandler.Instance.ReadCacheData();
+
+        CurrentData.Current.KaijuuName = KaijuuNameField.text.ToString();
+
+        if (CurrentData.Current.KaijuuName == "") { CurrentData.Current.KaijuuName = "Test Subject"; }
+
+        CurrentData.Current.FoodEaten = this.foodEaten;
+        CurrentData.Current.Color = new float[] { KaijuuColor.x, KaijuuColor.y, KaijuuColor.z };
+
+        int smallest = AbilityGrowth[0];
+        int smallestIndex = 0;
+        for (int i = 1; i < AbilityGrowth.Length; i++)
+        {
+            if (smallest > AbilityGrowth[i])
+            {
+                smallest = AbilityGrowth[i];
+                smallestIndex = i;
+            }
+        }
+
+        CurrentData.Current.Ability1 = (smallestIndex != 0)?  "Horns": "Tail";
+
+        if (CurrentData.Current.Ability1 == "Horns")
+            CurrentData.Current.Ability2 = (smallestIndex != 1) ? "Tail" : "Wings";
+        else
+            CurrentData.Current.Ability2 = "Wings";
+
+        CurrentData.Current.Destruction = 0;
+        CurrentData.Current.Distance = 0;
+        CurrentData.Current.Score = 0;
+
+        return CurrentData;
     }
 
     // ----------------------------------------------------------

@@ -46,6 +46,7 @@ public partial class DataHandler : MonoBehaviour
     }
     public void ResetCacheData()
     {
+        Debug.Log("a");
         cacheData = new CacheData();
         string cacheJson = JsonUtility.ToJson(cacheData, true);
         string cachePath = Application.dataPath + "/Resources/CacheData.json";
