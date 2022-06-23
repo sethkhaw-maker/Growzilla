@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class GrowStageKaijuuHandler : MonoBehaviour
 {
@@ -26,11 +28,17 @@ public class GrowStageKaijuuHandler : MonoBehaviour
     int[] AbilityGrowth = new int[3];
     Vector3 KaijuuColor = new Vector3(1.0f, 1.0f, 1.0f);
 
+  
+    
+    
+    public List<Animator> KaijuAnimators;
+
     // ----------------------------------------------------------
 
     void Awake()
     {
         ImplementSingleton();
+
     }
 
     void Start()
@@ -64,6 +72,11 @@ public class GrowStageKaijuuHandler : MonoBehaviour
 
     void MoveKaijuu()
     {
+        foreach (Animator anims in KaijuAnimators)
+        {
+            if(anims.GetCurrentAnimatorStateInfo(0).IsName("Walk")!=true)
+            anims.Play("Walk");
+        }
         if (KaijuuObject == null) { return; }
         if (!KaijuuMovementEnabled) { return; }
         if (flipDelay > 0.0f) { flipDelay -= Time.deltaTime; return; }
@@ -92,6 +105,11 @@ public class GrowStageKaijuuHandler : MonoBehaviour
     }
     void TryFlipKaijuu()
     {
+        foreach (Animator anims in KaijuAnimators)
+        {
+            if (anims.GetCurrentAnimatorStateInfo(0).IsName("Walk") != true)
+                anims.Play("Idle");
+        }
         if (KaijuuObject == null) { return; }
         if (!KaijuuMovementEnabled) { return; }
         if (kaijuuFlipTimer > 0.0f) { kaijuuFlipTimer -= Time.deltaTime; return; }
@@ -178,7 +196,7 @@ public class GrowStageKaijuuHandler : MonoBehaviour
         {
             for (int i = 0; i < 3; i++)
             {
-                if (i == smallestIndex) { MidUpgrades[i].SetActive(false); }
+                if (i == smallestIndex) { MidUpgrades[i].GetComponent<Animator>().Play("Despawn"); }
                 else { MidUpgrades[i].SetActive(true); }
             }
         }
@@ -186,7 +204,7 @@ public class GrowStageKaijuuHandler : MonoBehaviour
         {
             for (int i = 0; i < 3; i++)
             {
-                if (i == smallestIndex) { BigUpgrades[i].SetActive(false); }
+                if (i == smallestIndex) { BigUpgrades[i].GetComponent<Animator>().Play("Despawn"); ; }
                 else { BigUpgrades[i].SetActive(true); }
             }
         }
