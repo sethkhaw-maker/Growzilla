@@ -10,7 +10,13 @@ public class GrowStageKaijuuHandler : MonoBehaviour
     [SerializeField] GameObject KaijuuObject = null;
     [SerializeField] GameObject[] KaijuuSizes = new GameObject[3];
     [SerializeField] SpriteRenderer[] AllColorableParts = new SpriteRenderer[1];
+
+    [SerializeField] GameObject[] KaijuuSizesDisplay = new GameObject[3];
+    [SerializeField] SpriteRenderer[] AllColorablePartsDisplay = new SpriteRenderer[1];
+
     [SerializeField] UnityEngine.UI.Text KaijuuNameField = null;
+
+    [SerializeField] GameObject DisplayObject = null;
 
     [Header("Evolution Threshold")]
     [SerializeField] int midEvolveAmount = 10;
@@ -27,11 +33,9 @@ public class GrowStageKaijuuHandler : MonoBehaviour
     int foodEaten = 0;
     int[] AbilityGrowth = new int[3];
     Vector3 KaijuuColor = new Vector3(1.0f, 1.0f, 1.0f);
-
-  
-    
     
     public List<Animator> KaijuAnimators;
+
 
     // ----------------------------------------------------------
 
@@ -137,9 +141,12 @@ public class GrowStageKaijuuHandler : MonoBehaviour
                 KaijuuSizes[currentSize].transform.position.z
                 );
 
+        KaijuuSizesDisplay[currentSize].SetActive(true);
+
         UpdateColor();
 
         KaijuuSizes[currentSize-1].SetActive(false);
+        KaijuuSizesDisplay[currentSize - 1].SetActive(false);
     }
 
     // ----------------------------------------------------------
@@ -168,6 +175,9 @@ public class GrowStageKaijuuHandler : MonoBehaviour
 
     [SerializeField] GameObject[] MidUpgrades = new GameObject[1];
     [SerializeField] GameObject[] BigUpgrades = new GameObject[1];
+
+    [SerializeField] GameObject[] MidUpgradesDisplay = new GameObject[1];
+    [SerializeField] GameObject[] BigUpgradesDisplay = new GameObject[1];
 
     public void OnKaijuuTryEvolve()
     {
@@ -198,6 +208,9 @@ public class GrowStageKaijuuHandler : MonoBehaviour
             {
                 if (i == smallestIndex) { MidUpgrades[i].GetComponent<Animator>().Play("Despawn"); }
                 else { MidUpgrades[i].SetActive(true); }
+
+                if (i == smallestIndex) { MidUpgradesDisplay[i].SetActive(false); }
+                else { MidUpgradesDisplay[i].SetActive(true); }
             }
         }
         if (currentSize == 2)
@@ -206,6 +219,9 @@ public class GrowStageKaijuuHandler : MonoBehaviour
             {
                 if (i == smallestIndex) { BigUpgrades[i].GetComponent<Animator>().Play("Despawn"); ; }
                 else { BigUpgrades[i].SetActive(true); }
+
+                if (i == smallestIndex) { BigUpgradesDisplay[i].SetActive(false); }
+                else { BigUpgradesDisplay[i].SetActive(true); }
             }
         }
     }
@@ -213,6 +229,10 @@ public class GrowStageKaijuuHandler : MonoBehaviour
     public void UpdateColor()
     {
         foreach(SpriteRenderer SR in AllColorableParts)
+        {
+            SR.color = new Color(KaijuuColor.x, KaijuuColor.y, KaijuuColor.z, 1.0f);
+        }
+        foreach (SpriteRenderer SR in AllColorablePartsDisplay)
         {
             SR.color = new Color(KaijuuColor.x, KaijuuColor.y, KaijuuColor.z, 1.0f);
         }
@@ -229,9 +249,11 @@ public class GrowStageKaijuuHandler : MonoBehaviour
                 KaijuuObject.transform.position.y,
                 50f
                     );
+        DisplayObject.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
     }
     public void OnRampageButtonPressed()
     {
+        DisplayObject.transform.position = new Vector3(0.0f, 1000.0f, 0.0f);
         DataHandler.Instance.InputCacheData(ReturnKaijuuData());
         DataHandler.Instance.UpdateCacheData();
     }

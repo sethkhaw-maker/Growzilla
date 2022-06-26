@@ -190,6 +190,8 @@ public class GrowStageSceneHandler : MonoBehaviour
     // Call using Unity Button Events
     public void OnNameEnterButtonPressed()
     {
+        if (NamePanelReference != null) NamePanelReference.SetActive(false);
+
         // 1. Play scene fade animation.
         if (ScreenFader != null) ScreenFader.GetComponent<Animator>().enabled = true;
 
