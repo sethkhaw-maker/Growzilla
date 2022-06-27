@@ -17,6 +17,7 @@ public class GrowStageSceneHandler : MonoBehaviour
     [SerializeField] GameObject AndroidButtonA = null;
     [SerializeField] GameObject AndroidButtonB = null;
     [SerializeField] Text TimeLeftBeforeAttack = null;
+    [SerializeField] AudioSource MaximizePanelAudio = null;
 
     [Header("Adjustable Values")]
     [SerializeField] float GrowStageFoodSpawnBuffer = 3.0f;
@@ -186,6 +187,7 @@ public class GrowStageSceneHandler : MonoBehaviour
 
         // 4. Spawn Name Input Panel.
         if (NamePanelReference != null) NamePanelReference.SetActive(true);
+        MaximizePanelAudio.Play(); 
     }
     // Call using Unity Button Events
     public void OnNameEnterButtonPressed()

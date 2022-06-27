@@ -11,6 +11,7 @@ public class FoodFactory : MonoBehaviour
     [HideInInspector] public GameObject foodInChuteObject = null;
     [SerializeField] float ConveyorSpeed = 1.0f;
     [SerializeField] float FallingSpeed = 5.0f;
+    [SerializeField] AudioSource ChuteReleaseAudio = null;
 
     [HideInInspector] public bool FactoryIsEnabled = true;
 
@@ -84,6 +85,7 @@ public class FoodFactory : MonoBehaviour
         }
         
         SpawnedObject.GetComponent<FoodScript>().OnCreate();
+        ChuteReleaseAudio.Play();
 
         return arg_foodData;
     }
