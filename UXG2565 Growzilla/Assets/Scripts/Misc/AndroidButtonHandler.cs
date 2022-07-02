@@ -4,12 +4,16 @@ using UnityEngine.EventSystems;
 
 public class AndroidButtonHandler : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
+    public bool ShowButtonsOnPC = false;
     public bool buttonPressed;
     public UnityEvent buttonFunction;
 
     void Awake()
     {
-        if (SystemInfo.deviceType != DeviceType.Handheld) { this.gameObject.SetActive(false); }
+        if (ShowButtonsOnPC == false)
+        {
+            if (SystemInfo.deviceType != DeviceType.Handheld) { this.gameObject.SetActive(false); }
+        }
     }
 
     void Update()

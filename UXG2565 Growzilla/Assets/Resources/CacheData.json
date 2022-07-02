@@ -1,13 +1,13 @@
 {
     "Current": {
-        "KaijuuName": "TestSubject0",
-        "FoodEaten": 23,
+        "KaijuuName": "TestSubject",
+        "FoodEaten": 10,
         "Color": [
-            0.6915481090545654,
-            0.8074021339416504,
-            0.7582407593727112
+            1,
+            1,
+            1
         ],
-        "Ability1": "Tail",
+        "Ability1": "Horns",
         "Ability2": "Wings",
         "Destruction": 0,
         "Distance": 0,
