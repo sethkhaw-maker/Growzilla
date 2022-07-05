@@ -98,9 +98,19 @@ public class RampageStageSceneHandler : MonoBehaviour
         Ability1CooldownTimer = 0.0f;
         Ability2CooldownTimer = 0.0f;
     }
-
-    // Should be looping
     public void HandleObstacleSpawning()
+    {
+
+    }
+    public void HandleFloorSpawning()
+    {
+
+    }
+    public void HandleMidgroundObjectSpawning()
+    {
+
+    }
+    public void HandleBackgroundObjectSpawning()
     {
 
     }
@@ -134,8 +144,6 @@ public class RampageStageSceneHandler : MonoBehaviour
 
         Ability2CooldownTimer = AbilityCooldown;
     }
-
-    // Executable abilities, can be refactored into strategy pattern if we need to expand upon this game.
     private void ExecuteAbilityHorns()
     {
         foreach(GameObject go in KaijuuSizes)
