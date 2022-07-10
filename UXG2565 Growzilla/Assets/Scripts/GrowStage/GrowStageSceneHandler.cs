@@ -217,7 +217,7 @@ public class GrowStageSceneHandler : MonoBehaviour
     public void OnSceneFaded()
     {
         // 1. Change Scene.
-        SceneManager.LoadScene("01_GrowScene");
+        SceneManager.LoadScene("02_RampageScene");
     }
 
     // ----------------------------------------------------------
