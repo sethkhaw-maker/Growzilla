@@ -8,12 +8,31 @@ public partial class DataHandler : MonoBehaviour
     private DynamicData scoreData = new DynamicData();
     private CacheData cacheData = new CacheData();
     // ----------------------------------------------------------------
+
+    public string InitialDataPath = "";
+
+#if UNITY_ANDROID
+
     void Awake()
     {
+        InitialDataPath = Application.persistentDataPath;
         ImplementSingleton();
         GetHighscore();
         GetCacheData();
     }
+
+#else
+
+    void Awake()
+    {
+        InitialDataPath = Application.dataPath;
+        ImplementSingleton();
+        GetHighscore();
+        GetCacheData();
+    }
+
+#endif
+
 }
 
 public partial class DataHandler : MonoBehaviour
@@ -32,7 +51,7 @@ public partial class DataHandler : MonoBehaviour
     // ----------------------------------------------------------------
     public void GetCacheData()
     {
-        string cachePath = Application.dataPath + "/Resources/CacheData.json";
+        string cachePath = InitialDataPath + "/CacheData.json";
 
         if (File.Exists(cachePath))
         {
@@ -49,13 +68,13 @@ public partial class DataHandler : MonoBehaviour
         Debug.Log("a");
         cacheData = new CacheData();
         string cacheJson = JsonUtility.ToJson(cacheData, true);
-        string cachePath = Application.dataPath + "/Resources/CacheData.json";
+        string cachePath = InitialDataPath + "/CacheData.json";
         File.WriteAllText(cachePath, cacheJson);
     }
     public void UpdateCacheData()
     {
         string cacheJson = JsonUtility.ToJson(cacheData, true);
-        string cachePath = Application.dataPath + "/Resources/CacheData.json";
+        string cachePath = InitialDataPath + "/CacheData.json";
         File.WriteAllText(cachePath, cacheJson);
     }
     public CacheData ReadCacheData()
@@ -70,7 +89,7 @@ public partial class DataHandler : MonoBehaviour
     // ----------------------------------------------------------------
     public void GetHighscore()
     {
-        string dynPath = Application.dataPath + "/Resources/ScoreData.json";
+        string dynPath = InitialDataPath + "/ScoreData.json";
 
         if (File.Exists(dynPath))
         {
@@ -93,7 +112,7 @@ public partial class DataHandler : MonoBehaviour
         if (scoreData.Highscore.Count > 0) { scoreData.Highscore.Sort(); }
 
         string dynJson = JsonUtility.ToJson(scoreData, true);
-        string dynPath = Application.dataPath + "/Resources/ScoreData.json";
+        string dynPath = InitialDataPath + "/ScoreData.json";
         File.WriteAllText(dynPath, dynJson);
     }
     public void UpdateHighscore()
@@ -101,7 +120,7 @@ public partial class DataHandler : MonoBehaviour
         if (scoreData.Highscore.Count > 0) { scoreData.Highscore.Sort(); }
 
         string dynJson = JsonUtility.ToJson(scoreData, true);
-        string dynPath = Application.dataPath + "/Resources/ScoreData.json";
+        string dynPath = InitialDataPath + "/ScoreData.json";
         File.WriteAllText(dynPath, dynJson);
     }
 }
