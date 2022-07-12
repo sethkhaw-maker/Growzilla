@@ -7,6 +7,7 @@ public class AutoPlayKaijuAnimation : MonoBehaviour
     public Animator SmallKaiju;
     public Animator MidKaiju;
     public Animator BigKaiju;
+    public Animator[] Sonar;
 
     // Update is called once per frame
     void Update()
@@ -31,6 +32,10 @@ public class AutoPlayKaijuAnimation : MonoBehaviour
                 {
                     BigKaiju.Play("Idle");
                 }
+                else if(Input.GetKeyDown(KeyCode.W))
+                {
+                    Sonar[1].Play("SonarAttack");
+                }
             }
             else
             {
@@ -49,6 +54,10 @@ public class AutoPlayKaijuAnimation : MonoBehaviour
                 else if (Input.GetKeyDown(KeyCode.Space))
                 {
                     MidKaiju.Play("Idle");
+                }
+                else if (Input.GetKeyDown(KeyCode.W))
+                {
+                    Sonar[0].Play("SonarAttack");
                 }
             }
         }
