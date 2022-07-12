@@ -1594,6 +1594,7 @@ GameObject:
   - component: {fileID: 211302248}
   - component: {fileID: 211302249}
   - component: {fileID: 211302250}
+  - component: {fileID: 211302251}
   m_Layer: 8
   m_Name: MidKaijuu
   m_TagString: Untagged
@@ -1682,6 +1683,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &211302251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211302246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c71d43246337194c930c58f0901f802, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SmokeParticles: {fileID: 0}
+  SmokeSpawnPoints: []
 --- !u!1 &228621715
 GameObject:
   m_ObjectHideFlags: 0
@@ -5274,6 +5289,7 @@ GameObject:
   - component: {fileID: 696659781}
   - component: {fileID: 696659782}
   - component: {fileID: 696659783}
+  - component: {fileID: 696659784}
   m_Layer: 8
   m_Name: BigKaijuu
   m_TagString: Untagged
@@ -5362,6 +5378,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &696659784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696659779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c71d43246337194c930c58f0901f802, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SmokeParticles: {fileID: 0}
+  SmokeSpawnPoints: []
 --- !u!1 &700710004
 GameObject:
   m_ObjectHideFlags: 0
@@ -8983,6 +9013,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68c63a63604b96146a02640dcf143fc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InitialDataPath: 
 --- !u!114 &1138808931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12780,6 +12811,7 @@ GameObject:
   - component: {fileID: 1524153587}
   - component: {fileID: 1524153588}
   - component: {fileID: 1524153589}
+  - component: {fileID: 1524153590}
   m_Layer: 8
   m_Name: SmallKaijuu
   m_TagString: Untagged
@@ -12868,6 +12900,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1524153590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524153585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c71d43246337194c930c58f0901f802, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SmokeParticles: {fileID: 0}
+  SmokeSpawnPoints: []
 --- !u!1 &1542726931
 GameObject:
   m_ObjectHideFlags: 0

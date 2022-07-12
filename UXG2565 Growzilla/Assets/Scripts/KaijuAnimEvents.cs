@@ -9,18 +9,30 @@ public class KaijuAnimEvents : MonoBehaviour
 
     public void SpawnFrontLeg1()
     {
-        Instantiate(SmokeParticles, SmokeSpawnPoints[0].transform.position,Quaternion.identity);
+        if (SmokeParticles != null)
+        {
+            Instantiate(SmokeParticles, SmokeSpawnPoints[0].transform.position, Quaternion.identity);
+        }
     }
     public void SpawnFrontLeg2()
     {
-        Instantiate(SmokeParticles, SmokeSpawnPoints[1].transform.position, Quaternion.identity);
+        if (SmokeParticles != null)
+        {
+            Instantiate(SmokeParticles, SmokeSpawnPoints[1].transform.position, Quaternion.identity);
+        }
     }
     public void SpawnBackLeg1()
     {
-        Instantiate(SmokeParticles, SmokeSpawnPoints[2].transform.position, Quaternion.identity);
+        if (SmokeParticles != null)
+        {
+            Instantiate(SmokeParticles, SmokeSpawnPoints[2].transform.position, Quaternion.identity);
+        }
     }
     public void SpawnBackLeg2()
     {
-        Instantiate(SmokeParticles, SmokeSpawnPoints[3].transform.position, Quaternion.identity);
+        if (SmokeParticles != null)
+        {
+            Instantiate(SmokeParticles, SmokeSpawnPoints[3].transform.position, Quaternion.identity);
+        }
     }
 }
