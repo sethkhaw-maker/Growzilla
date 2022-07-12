@@ -19,6 +19,8 @@ public class GrowStageSceneHandler : MonoBehaviour
     [SerializeField] Text TimeLeftBeforeAttack = null;
     [SerializeField] AudioSource MaximizePanelAudio = null;
 
+    [SerializeField] Animator SceneTransition = null;
+
     [Header("Adjustable Values")]
     [SerializeField] float GrowStageFoodSpawnBuffer = 3.0f;
     [SerializeField] float GrowStageTimeLimit = 60.0f;
@@ -195,14 +197,16 @@ public class GrowStageSceneHandler : MonoBehaviour
         if (NamePanelReference != null) NamePanelReference.SetActive(false);
 
         // 1. Play scene fade animation.
-        if (ScreenFader != null) ScreenFader.GetComponent<Animator>().enabled = true;
+        //if (ScreenFader != null) ScreenFader.GetComponent<Animator>().enabled = true;
 
         // 2. Let the Kaijuu fall through the floor.
         if (BottomFloor != null) BottomFloor.SetActive(false);
         if (BottomFloorSpriteLeft != null) BottomFloorSpriteLeft.GetComponent<Animator>().enabled = true;
         if (BottomFloorSpriteRight != null) BottomFloorSpriteRight.GetComponent<Animator>().enabled = true;
 
-        StartCoroutine(SceneFadeCoroutine());
+        SceneTransition.Play("ToRampage");
+
+        //StartCoroutine(SceneFadeCoroutine());
     }
 
     IEnumerator SceneFadeCoroutine()
@@ -211,7 +215,7 @@ public class GrowStageSceneHandler : MonoBehaviour
         {
             yield return new WaitForSeconds(1);
         }
-        OnSceneFaded();
+        //OnSceneFaded();
     }
 
     public void OnSceneFaded()

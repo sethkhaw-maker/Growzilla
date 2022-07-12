@@ -8954,6 +8954,7 @@ MonoBehaviour:
   AndroidButtonB: {fileID: 653952225}
   TimeLeftBeforeAttack: {fileID: 195059410}
   MaximizePanelAudio: {fileID: 1341466294}
+  SceneTransition: {fileID: 1822955679}
   GrowStageFoodSpawnBuffer: 1
   GrowStageTimeLimit: 30
   ChuteSpeed: 25
@@ -14636,6 +14637,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1808173116}
   m_CullTransparentMesh: 0
+--- !u!95 &1822955679 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4592052950614204926, guid: 3c80b810c8644dc4facc4a825f340509, type: 3}
+  m_PrefabInstance: {fileID: 756323570}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1832957766
 GameObject:
   m_ObjectHideFlags: 0
