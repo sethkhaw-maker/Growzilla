@@ -40,6 +40,11 @@ public class RampageStageSceneHandler : MonoBehaviour
     void Start()
     {
         OnSceneLoad();
+
+        foreach(GameObject GO in KaijuuSizes)
+        {
+            if (GO.activeSelf == true) { GO.GetComponent<Animator>().Play("Walk"); }
+        }
     }
 
     void Update()
@@ -149,9 +154,16 @@ public class RampageStageSceneHandler : MonoBehaviour
                         );
             }
         }
-        HornsCollisionObject.SetActive(true);
-        Invoke("DisableHorns", AbilityDuration);
+        Invoke("EnableHorns", 0.3f);
+
+        foreach (GameObject GO in KaijuuSizes)
+        {
+            if (GO.activeSelf == true) { GO.GetComponent<Animator>().Play("Attack"); }
+        }
+
+        
     }
+    void EnableHorns() { HornsCollisionObject.SetActive(true); Invoke("DisableHorns", AbilityDuration); }
     void DisableHorns() { HornsCollisionObject.SetActive(false); }
     private void ExecuteAbilityTail()
     {
@@ -179,6 +191,11 @@ public class RampageStageSceneHandler : MonoBehaviour
             {
                 rb2d.velocity = (Vector2.up * rb2d.mass * JumpForce);
             }
+        }
+
+        foreach (GameObject GO in KaijuuSizes)
+        {
+            if (GO.activeSelf == true) { GO.GetComponent<Animator>().Play("Jump"); }
         }
     }
 
