@@ -37,6 +37,9 @@ public class RampageStageSceneHandler : MonoBehaviour
     [Header("Movement")]
     [SerializeField] Rigidbody2D[] KaijuuRigidBody = new Rigidbody2D[3];
 
+    [Header("TailAnimation")]
+    [SerializeField] GameObject[] TailWithAnimations = null;
+
     void Start()
     {
         OnSceneLoad();
@@ -160,8 +163,6 @@ public class RampageStageSceneHandler : MonoBehaviour
         {
             if (GO.activeSelf == true) { GO.GetComponent<Animator>().Play("Attack"); }
         }
-
-        
     }
     void EnableHorns() { HornsCollisionObject.SetActive(true); Invoke("DisableHorns", AbilityDuration); }
     void DisableHorns() { HornsCollisionObject.SetActive(false); }
@@ -179,9 +180,15 @@ public class RampageStageSceneHandler : MonoBehaviour
                         );
             }
         }
-        TailCollisionObject.SetActive(true);
-        Invoke("DisableTail", AbilityDuration);
+
+        Invoke("EnableTail", 0.3f);
+
+        foreach (GameObject GO in TailWithAnimations)
+        {
+            if (GO.activeSelf == true) { GO.GetComponent<Animator>().Play("SonarAttack"); }
+        }
     }
+    void EnableTail() { TailCollisionObject.SetActive(true); Invoke("DisableTail", AbilityDuration); }
     void DisableTail() { TailCollisionObject.SetActive(false); }
     private void ExecuteAbilityWings()
     {
