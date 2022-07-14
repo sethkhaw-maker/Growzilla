@@ -2,7 +2,7 @@
 
 public class ObstacleFactory : MonoBehaviour
 {
-    [SerializeField] float MinimumCooldown = 1.0f;
+    [SerializeField] Vector2 MinimumCooldown = new Vector2(1.0f, 2.0f);
     float obstacleMinimumCooldown = 0.0f;
 
     [SerializeField] Transform Obstacle1SpawnPosition = null;
@@ -15,16 +15,23 @@ public class ObstacleFactory : MonoBehaviour
     [SerializeField] GameObject Obstacle2Prefab = null;
     float obstacle2CooldownTimer = 0.0f;
 
+    [SerializeField] Transform Obstacle3SpawnPosition = null;
+    [SerializeField] Vector2 Obstacle3Cooldown = new Vector2(1.0f, 2.0f);
+    [SerializeField] GameObject Obstacle3Prefab = null;
+    float obstacle3CooldownTimer = 0.0f;
+
     void Start()
     {
         obstacle1CooldownTimer = Random.Range(Obstacle1Cooldown.x, Obstacle1Cooldown.y);
         obstacle2CooldownTimer = Random.Range(Obstacle2Cooldown.x, Obstacle2Cooldown.y);
+        obstacle3CooldownTimer = Random.Range(Obstacle3Cooldown.x, Obstacle3Cooldown.y);
     }
     void Update()
     {
         obstacleMinimumCooldown -= Time.deltaTime;
         Obstacle1Tick();
         Obstacle2Tick();
+        Obstacle3Tick();
     }
     void Obstacle1Tick()
     {
@@ -37,7 +44,7 @@ public class ObstacleFactory : MonoBehaviour
 
         obstacle1CooldownTimer = Random.Range(Obstacle1Cooldown.x, Obstacle1Cooldown.y);
 
-        obstacleMinimumCooldown = MinimumCooldown;
+        obstacleMinimumCooldown = Random.Range(MinimumCooldown.x, MinimumCooldown.y);
     }
     void Obstacle2Tick()
     {
@@ -50,6 +57,20 @@ public class ObstacleFactory : MonoBehaviour
 
         obstacle2CooldownTimer = Random.Range(Obstacle2Cooldown.x, Obstacle2Cooldown.y);
 
-        obstacleMinimumCooldown = MinimumCooldown;
+        obstacleMinimumCooldown = Random.Range(MinimumCooldown.x, MinimumCooldown.y);
+    }
+
+    void Obstacle3Tick()
+    {
+        if (obstacleMinimumCooldown > 0.0f) { return; }
+
+        if (Obstacle3Prefab == null) { return; }
+        if (obstacle3CooldownTimer > 0.0f) { obstacle3CooldownTimer -= Time.deltaTime; return; }
+
+        Instantiate(Obstacle3Prefab, Obstacle3SpawnPosition.position, Quaternion.identity);
+
+        obstacle3CooldownTimer = Random.Range(Obstacle3Cooldown.x, Obstacle3Cooldown.y);
+
+        obstacleMinimumCooldown = Random.Range(MinimumCooldown.x, MinimumCooldown.y);
     }
 }

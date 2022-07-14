@@ -3453,6 +3453,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &455585257
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 455585258}
+  m_Layer: 0
+  m_Name: Obstacle3SpawnPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &455585258
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455585257}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 12, y: -4.55, z: 50}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &457215050
 GameObject:
   m_ObjectHideFlags: 0
@@ -12354,7 +12384,7 @@ Transform:
   m_LocalScale: {x: 20, y: 0.75, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1728253001
 GameObject:
@@ -17915,7 +17945,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4045620238961143549}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -17949,7 +17979,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 100
   m_Sprite: {fileID: 21300000, guid: 30d84bd7df9427546b940822c4da4c40, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.101960786}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -18312,7 +18342,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4045620239153832092}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -19290,7 +19320,7 @@ Transform:
   - {fileID: 4045620240023712399}
   - {fileID: 4045620238082362632}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4045620239712760367
 GameObject:
@@ -20061,13 +20091,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de4bd8298ba8cf44b95deb4d0575b8a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinimumCooldown: 1
+  MinimumCooldown: {x: 1, y: 2}
   Obstacle1SpawnPosition: {fileID: 869402662}
-  Obstacle1Cooldown: {x: 1, y: 2}
+  Obstacle1Cooldown: {x: 3, y: 4}
   Obstacle1Prefab: {fileID: 2140807556652937663, guid: e9f5bbab4d88712498a3f38d55ca182d, type: 3}
   Obstacle2SpawnPosition: {fileID: 1110946520}
-  Obstacle2Cooldown: {x: 1, y: 2}
+  Obstacle2Cooldown: {x: 3, y: 4}
   Obstacle2Prefab: {fileID: 672249819793946563, guid: ac59e6596750ea74abfa746b63666c24, type: 3}
+  Obstacle3SpawnPosition: {fileID: 455585258}
+  Obstacle3Cooldown: {x: 3, y: 4}
+  Obstacle3Prefab: {fileID: 4262142124785624675, guid: 4857043dac0cd8448ae4c15bd7eab719, type: 3}
 --- !u!114 &4938299016329375024
 MonoBehaviour:
   m_ObjectHideFlags: 0
