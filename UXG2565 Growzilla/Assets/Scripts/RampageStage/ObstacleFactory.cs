@@ -20,11 +20,17 @@ public class ObstacleFactory : MonoBehaviour
     [SerializeField] GameObject Obstacle3Prefab = null;
     float obstacle3CooldownTimer = 0.0f;
 
+    [SerializeField] Transform Obstacle4SpawnPosition = null;
+    [SerializeField] Vector2 Obstacle4Cooldown = new Vector2(1.0f, 2.0f);
+    [SerializeField] GameObject Obstacle4Prefab = null;
+    float obstacle4CooldownTimer = 0.0f;
+
     void Start()
     {
         obstacle1CooldownTimer = Random.Range(Obstacle1Cooldown.x, Obstacle1Cooldown.y);
         obstacle2CooldownTimer = Random.Range(Obstacle2Cooldown.x, Obstacle2Cooldown.y);
         obstacle3CooldownTimer = Random.Range(Obstacle3Cooldown.x, Obstacle3Cooldown.y);
+        obstacle4CooldownTimer = Random.Range(Obstacle4Cooldown.x, Obstacle4Cooldown.y);
     }
     void Update()
     {
@@ -32,6 +38,7 @@ public class ObstacleFactory : MonoBehaviour
         Obstacle1Tick();
         Obstacle2Tick();
         Obstacle3Tick();
+        Obstacle4Tick();
     }
     void Obstacle1Tick()
     {
@@ -70,6 +77,20 @@ public class ObstacleFactory : MonoBehaviour
         Instantiate(Obstacle3Prefab, Obstacle3SpawnPosition.position, Quaternion.identity);
 
         obstacle3CooldownTimer = Random.Range(Obstacle3Cooldown.x, Obstacle3Cooldown.y);
+
+        obstacleMinimumCooldown = Random.Range(MinimumCooldown.x, MinimumCooldown.y);
+    }
+
+    void Obstacle4Tick()
+    {
+        if (obstacleMinimumCooldown > 0.0f) { return; }
+
+        if (Obstacle4Prefab == null) { return; }
+        if (obstacle4CooldownTimer > 0.0f) { obstacle4CooldownTimer -= Time.deltaTime; return; }
+
+        Instantiate(Obstacle4Prefab, Obstacle4SpawnPosition.position, Quaternion.identity);
+
+        obstacle4CooldownTimer = Random.Range(Obstacle4Cooldown.x, Obstacle4Cooldown.y);
 
         obstacleMinimumCooldown = Random.Range(MinimumCooldown.x, MinimumCooldown.y);
     }
