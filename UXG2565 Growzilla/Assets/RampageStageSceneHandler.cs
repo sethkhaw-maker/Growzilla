@@ -53,8 +53,15 @@ public class RampageStageSceneHandler : MonoBehaviour
         Ability2CooldownImage.fillAmount = (AbilityCooldown - Ability2CooldownTimer) / AbilityCooldown;
         if (Ability2CooldownTimer > 0.0f) { Ability2CooldownTimer -= Time.deltaTime; }
         else { if (Input.GetKey(KeyCode.X)) { OnAbility2ButtonPressed(); } }
-    }
 
+        UseDebugAbilities();
+    }
+    void UseDebugAbilities()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1)) { ExecuteAbilityHorns(); }
+        if (Input.GetKeyDown(KeyCode.Alpha2)) { ExecuteAbilityTail();  }
+        if (Input.GetKeyDown(KeyCode.Alpha3)) { ExecuteAbilityWings(); }
+    }
     public void OnSceneLoad()
     {
         // 1. Read data from data handler,
@@ -97,22 +104,6 @@ public class RampageStageSceneHandler : MonoBehaviour
 
         Ability1CooldownTimer = 0.0f;
         Ability2CooldownTimer = 0.0f;
-    }
-    public void HandleObstacleSpawning()
-    {
-
-    }
-    public void HandleFloorSpawning()
-    {
-
-    }
-    public void HandleMidgroundObjectSpawning()
-    {
-
-    }
-    public void HandleBackgroundObjectSpawning()
-    {
-
     }
 
     // Button Input

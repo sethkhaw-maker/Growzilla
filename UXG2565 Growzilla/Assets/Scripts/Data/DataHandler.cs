@@ -9,7 +9,7 @@ public partial class DataHandler : MonoBehaviour
     private CacheData cacheData = new CacheData();
     // ----------------------------------------------------------------
 
-    public string InitialDataPath = "";
+    [HideInInspector] public string InitialDataPath = "";
 
 #if UNITY_ANDROID
 
