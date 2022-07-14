@@ -3,6 +3,7 @@
 public class ObstacleGenericBuilding : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 2.0f;
+    [SerializeField] GameObject ExplosionPrefab = null;
     Rigidbody2D rb2d = null;
 
     void Awake()
@@ -32,6 +33,8 @@ public class ObstacleGenericBuilding : MonoBehaviour
                 Debug.Log("Kaijuu Receives Damage from Buildings!");
                 GetComponent<Animator>().Play("Building1Destroyed");
                 GetComponent<Collider2D>().enabled = false;
+                var temp = Instantiate(ExplosionPrefab, this.gameObject.transform.position, Quaternion.identity);
+                temp.transform.localScale = new Vector3(1, 1, 1);
                 Invoke("OnDestroyed", 1.0f);
                 break;
             case "ability_horns_hitbox":
@@ -41,6 +44,8 @@ public class ObstacleGenericBuilding : MonoBehaviour
                 Debug.Log("Kaijuu Used Skill to Destroy Buildings!");
                 GetComponent<Animator>().Play("Building1Destroyed");
                 GetComponent<Collider2D>().enabled = false;
+                var temp2 = Instantiate(ExplosionPrefab, this.gameObject.transform.position, Quaternion.identity);
+                temp2.transform.localScale = new Vector3(1, 1, 1);
                 Invoke("OnDestroyed", 1.0f);
                 break;
             case "SceneBorders":

@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObstacleLandmine : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 2.0f;
+    [SerializeField] GameObject ExplosionPrefab = null;
     Rigidbody2D rb2d = null;
 
     void Awake()
@@ -34,14 +35,18 @@ public class ObstacleLandmine : MonoBehaviour
                 Debug.Log("Kaijuu Receives Damage from Landmines!");
                 GetComponent<Animator>().Play("LandmineTrigger");
                 GetComponent<Collider2D>().enabled = false;
-                Invoke("OnDestroyed", 1.0f);
+                Instantiate(ExplosionPrefab, this.gameObject.transform.position, Quaternion.identity);
+                Destroy(this.gameObject);
+                //Invoke("OnDestroyed", 1.0f);
                 break;
             case "ability_tail_hitbox":
                 // Add Destruction score.
                 Debug.Log("Kaijuu Used Skill to Destroy Landmines!");
                 GetComponent<Animator>().Play("LandmineTrigger");
                 GetComponent<Collider2D>().enabled = false;
-                Invoke("OnDestroyed", 1.0f);
+                Instantiate(ExplosionPrefab, this.gameObject.transform.position, Quaternion.identity);
+                Destroy(this.gameObject);
+                //Invoke("OnDestroyed", 1.0f);
                 break;
             case "SceneBorders":
                 Destroy(this.gameObject);

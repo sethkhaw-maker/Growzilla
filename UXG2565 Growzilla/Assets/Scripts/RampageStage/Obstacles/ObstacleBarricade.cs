@@ -3,6 +3,7 @@
 public class ObstacleBarricade : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 2.0f;
+    [SerializeField] GameObject ExplosionPrefab = null;
     Rigidbody2D rb2d = null;
 
     void Awake()
@@ -32,14 +33,18 @@ public class ObstacleBarricade : MonoBehaviour
                 Debug.Log("Kaijuu Receives Damage from Barricade!");
                 GetComponent<Animator>().Play("BarricadeTrigger");
                 GetComponent<Collider2D>().enabled = false;
-                Invoke("OnDestroyed", 1.1f);
+                Instantiate(ExplosionPrefab, this.gameObject.transform.position, Quaternion.identity);
+                Destroy(this.gameObject);
+                //Invoke("OnDestroyed", 1.1f);
                 break;
             case "ability_horns_hitbox":
                 // Add Destruction score.
                 Debug.Log("Kaijuu Used Skill to Destroy Barricade!");
                 GetComponent<Animator>().Play("BarricadeTrigger");
                 GetComponent<Collider2D>().enabled = false;
-                Invoke("OnDestroyed", 1.1f);
+                Instantiate(ExplosionPrefab, this.gameObject.transform.position, Quaternion.identity);
+                Destroy(this.gameObject);
+                //Invoke("OnDestroyed", 1.1f);
                 break;
             case "SceneBorders":
                 Destroy(this.gameObject);
