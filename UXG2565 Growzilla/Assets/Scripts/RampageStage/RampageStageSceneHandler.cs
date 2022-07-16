@@ -94,7 +94,7 @@ public class RampageStageSceneHandler : MonoBehaviour
             (CurrentData.Current.Ability1 != "Horns" && CurrentData.Current.Ability2 != "Horns")? 0 :
             (CurrentData.Current.Ability1 != "Tail" && CurrentData.Current.Ability2 != "Tail") ? 1 : 2;
 
-        for (int hp = 0; hp <= 3; hp++)
+        for (int hp = 0; hp < 3; hp++)
         {
             if (hp > currentSize)
             {
