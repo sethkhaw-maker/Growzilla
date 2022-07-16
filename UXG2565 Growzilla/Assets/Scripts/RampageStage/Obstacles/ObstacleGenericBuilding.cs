@@ -4,6 +4,7 @@ public class ObstacleGenericBuilding : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 2.0f;
     [SerializeField] GameObject ExplosionPrefab = null;
+    [SerializeField] int DestructionScore = 25;
     Rigidbody2D rb2d = null;
 
     void Awake()
@@ -28,8 +29,8 @@ public class ObstacleGenericBuilding : MonoBehaviour
             case "BigKaijuu":
             case "MidKaijuu":
             case "SmallKaijuu":
-                // Deal Damage to Kaijuu Here.
-                // Add Destruction Score
+                RampageDestructionHandler.Instance.LoseHealth();
+                RampageDestructionHandler.Instance.AddScore(DestructionScore);
                 Debug.Log("Kaijuu Receives Damage from Buildings!");
                 GetComponent<Animator>().Play("Building1Destroyed");
                 GetComponent<Collider2D>().enabled = false;
@@ -40,7 +41,7 @@ public class ObstacleGenericBuilding : MonoBehaviour
             case "ability_horns_hitbox":
             case "ability_tail_hitbox":
             case "ability_wings_hitbox":
-                // Add Destruction score.
+                RampageDestructionHandler.Instance.AddScore(DestructionScore);
                 Debug.Log("Kaijuu Used Skill to Destroy Buildings!");
                 GetComponent<Animator>().Play("Building1Destroyed");
                 GetComponent<Collider2D>().enabled = false;

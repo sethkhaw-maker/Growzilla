@@ -13,10 +13,16 @@ public class RampageStageSceneHandler : MonoBehaviour
     [SerializeField] Image Ability2CooldownImage = null;
     [SerializeField] GameObject[] MidUpgrades = new GameObject[1];
     [SerializeField] GameObject[] BigUpgrades = new GameObject[1];
+    [SerializeField] Sprite[] AbilityButtonSprites = null;
+
+    [SerializeField] GameObject[] HealthObjects = null;
+    [SerializeField] Sprite ActiveHealth = null;
+    [SerializeField] Sprite DeactiveHealth = null;
+
+    [SerializeField] int CurrentHealth = 0;
 
     public string Ability1 { get; private set; }
     public string Ability2 { get; private set; }
-
 
     [Header("World")]
     [SerializeField] float WorldMoveSpeed = 1.0f;
@@ -88,6 +94,13 @@ public class RampageStageSceneHandler : MonoBehaviour
             (CurrentData.Current.Ability1 != "Horns" && CurrentData.Current.Ability2 != "Horns")? 0 :
             (CurrentData.Current.Ability1 != "Tail" && CurrentData.Current.Ability2 != "Tail") ? 2 : 1;
 
+        for (int hp = 0; hp <= currentSize; hp++)
+        {
+            HealthObjects[hp].SetActive(true);
+        }
+
+        CurrentHealth = currentSize + 1;
+
         if (currentSize == 1)
         {
             for (int i = 0; i < 3; i++)
@@ -112,8 +125,85 @@ public class RampageStageSceneHandler : MonoBehaviour
 
         Ability1CooldownTimer = 0.0f;
         Ability2CooldownTimer = 0.0f;
+
+        switch (CurrentData.Current.Ability1)
+        {
+            case "Horns":
+                Ability1Button.image.sprite = AbilityButtonSprites[3];
+                Ability1CooldownImage.sprite = AbilityButtonSprites[0];
+                break;
+            case "Tail":
+                Ability1Button.image.sprite = AbilityButtonSprites[4];
+                Ability1CooldownImage.sprite = AbilityButtonSprites[1];
+                break;
+            case "Wings":
+                Ability1Button.image.sprite = AbilityButtonSprites[5];
+                Ability1CooldownImage.sprite = AbilityButtonSprites[2];
+                break;
+            default:
+                Ability1Button.image.sprite = AbilityButtonSprites[3];
+                Ability1CooldownImage.sprite = AbilityButtonSprites[0];
+                break;
+        }
+        switch (CurrentData.Current.Ability2)
+        {
+            case "Horns":
+                Ability2Button.image.sprite = AbilityButtonSprites[3];
+                Ability2CooldownImage.sprite = AbilityButtonSprites[0];
+                break;
+            case "Tail":
+                Ability2Button.image.sprite = AbilityButtonSprites[4];
+                Ability2CooldownImage.sprite = AbilityButtonSprites[1];
+                break;
+            case "Wings":
+                Ability2Button.image.sprite = AbilityButtonSprites[5];
+                Ability2CooldownImage.sprite = AbilityButtonSprites[2];
+                break;
+            default:
+                Ability2Button.image.sprite = AbilityButtonSprites[3];
+                Ability2CooldownImage.sprite = AbilityButtonSprites[0];
+                break;
+        }
     }
 
+    public void DecreaseHealth()
+    {
+        CurrentHealth = (CurrentHealth > 0) ? CurrentHealth -= 1 : 0;
+        
+        for (int hp = 0; hp < 3; hp++)
+        {
+            if (hp >= CurrentHealth)
+            {
+                HealthObjects[hp].GetComponent<Image>().sprite = DeactiveHealth;
+            }
+            else
+            {
+                HealthObjects[hp].GetComponent<Image>().sprite = ActiveHealth;
+            }
+        }
+
+        if (CurrentHealth == 0)
+        {
+            OnGameOver();
+        }
+    }
+    [SerializeField] GameObject ExplosionPrefab = null;
+    [SerializeField] GameObject PlaceholderGameoverText = null;
+    [SerializeField] GameObject LoadingScreen = null;
+    public void OnGameOver()
+    {
+        var temp = Instantiate(ExplosionPrefab, KaijuuObject.transform.position, Quaternion.identity);
+        temp.transform.localScale = new Vector3(3.0f, 3.0f, 3.0f);
+        KaijuuObject.transform.position =
+            new Vector3(
+                KaijuuObject.transform.position.x,
+                KaijuuObject.transform.position.y + 1000.0f,
+                KaijuuObject.transform.position.z
+                );
+        PlaceholderGameoverText.SetActive(true);
+        Invoke("ReturnToGrowScene", 1.0f);
+    }
+    public void ReturnToGrowScene() { LoadingScreen.GetComponent<Animator>().Play("ToMainMenu"); }
     // Button Input
     public void OnAbility1ButtonPressed()
     {

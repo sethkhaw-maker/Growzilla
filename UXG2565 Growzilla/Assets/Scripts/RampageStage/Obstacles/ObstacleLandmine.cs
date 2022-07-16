@@ -6,6 +6,7 @@ public class ObstacleLandmine : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 2.0f;
     [SerializeField] GameObject ExplosionPrefab = null;
+    [SerializeField] int DestructionScore = 50;
     Rigidbody2D rb2d = null;
 
     void Awake()
@@ -30,8 +31,8 @@ public class ObstacleLandmine : MonoBehaviour
             case "BigKaijuu":
             case "MidKaijuu":
             case "SmallKaijuu":
-                // Deal Damage to Kaijuu Here.
-                // Add Destruction Score
+                RampageDestructionHandler.Instance.LoseHealth();
+                RampageDestructionHandler.Instance.AddScore(DestructionScore);
                 Debug.Log("Kaijuu Receives Damage from Landmines!");
                 GetComponent<Animator>().Play("LandmineTrigger");
                 GetComponent<Collider2D>().enabled = false;
@@ -40,7 +41,7 @@ public class ObstacleLandmine : MonoBehaviour
                 //Invoke("OnDestroyed", 1.0f);
                 break;
             case "ability_tail_hitbox":
-                // Add Destruction score.
+                RampageDestructionHandler.Instance.AddScore(DestructionScore);
                 Debug.Log("Kaijuu Used Skill to Destroy Landmines!");
                 GetComponent<Animator>().Play("LandmineTrigger");
                 GetComponent<Collider2D>().enabled = false;
