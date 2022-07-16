@@ -29,6 +29,7 @@ public class ObstacleGenericBuilding : MonoBehaviour
             case "BigKaijuu":
             case "MidKaijuu":
             case "SmallKaijuu":
+                ScreenShakeController.cam_instance.startShake(0.05f, 0.05f);
                 RampageDestructionHandler.Instance.LoseHealth();
                 RampageDestructionHandler.Instance.AddScore(DestructionScore);
                 Debug.Log("Kaijuu Receives Damage from Buildings!");
@@ -41,6 +42,7 @@ public class ObstacleGenericBuilding : MonoBehaviour
             case "ability_horns_hitbox":
             case "ability_tail_hitbox":
             case "ability_wings_hitbox":
+                ScreenShakeController.cam_instance.startShake(0.05f, 0.05f);
                 RampageDestructionHandler.Instance.AddScore(DestructionScore);
                 Debug.Log("Kaijuu Used Skill to Destroy Buildings!");
                 GetComponent<Animator>().Play("Building1Destroyed");

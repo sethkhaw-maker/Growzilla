@@ -30,6 +30,7 @@ public class ObstacleHelicopter : MonoBehaviour
             case "BigKaijuu":
             case "MidKaijuu":
             case "SmallKaijuu":
+                ScreenShakeController.cam_instance.startShake(0.05f, 0.05f);
                 // Deal Damage to Kaijuu Here.
                 RampageDestructionHandler.Instance.AddScore(DestructionScore);
                 Debug.Log("Kaijuu Destroys helicopter!");

@@ -84,7 +84,7 @@ public class RampageStageSceneHandler : MonoBehaviour
         Ability1 = CurrentData.Current.Ability1;
         Ability2 = CurrentData.Current.Ability2;
 
-        int currentSize = (CurrentData.Current.FoodEaten < 8) ? 0 : (CurrentData.Current.FoodEaten < 15) ? 1 : 2;
+        int currentSize = (CurrentData.Current.FoodEaten <= 8) ? 0 : (CurrentData.Current.FoodEaten <= 15) ? 1 : 2;
 
         foreach(GameObject go in KaijuuSizes) { go.SetActive(false); }
 
@@ -92,11 +92,18 @@ public class RampageStageSceneHandler : MonoBehaviour
 
         int smallestIndex = 
             (CurrentData.Current.Ability1 != "Horns" && CurrentData.Current.Ability2 != "Horns")? 0 :
-            (CurrentData.Current.Ability1 != "Tail" && CurrentData.Current.Ability2 != "Tail") ? 2 : 1;
+            (CurrentData.Current.Ability1 != "Tail" && CurrentData.Current.Ability2 != "Tail") ? 1 : 2;
 
-        for (int hp = 0; hp <= currentSize; hp++)
+        for (int hp = 0; hp <= 3; hp++)
         {
-            HealthObjects[hp].SetActive(true);
+            if (hp > currentSize)
+            {
+                HealthObjects[hp].SetActive(false);
+            }
+            else
+            {
+                HealthObjects[hp].SetActive(true);
+            }
         }
 
         CurrentHealth = currentSize + 1;
@@ -169,7 +176,8 @@ public class RampageStageSceneHandler : MonoBehaviour
     public void DecreaseHealth()
     {
         CurrentHealth = (CurrentHealth > 0) ? CurrentHealth -= 1 : 0;
-        
+        ScreenShakeController.cam_instance.startShake(0.07f, 0.07f);
+
         for (int hp = 0; hp < 3; hp++)
         {
             if (hp >= CurrentHealth)
@@ -184,6 +192,7 @@ public class RampageStageSceneHandler : MonoBehaviour
 
         if (CurrentHealth == 0)
         {
+            ScreenShakeController.cam_instance.startShake(0.1f, 0.1f);
             OnGameOver();
         }
     }

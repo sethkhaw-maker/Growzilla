@@ -33,6 +33,11 @@ public partial class DataHandler : MonoBehaviour
 
 #endif
 
+    void Start()
+    {
+        Debug.Log(InitialDataPath);    
+    }
+
 }
 
 public partial class DataHandler : MonoBehaviour

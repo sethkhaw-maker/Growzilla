@@ -12,6 +12,7 @@ public class ReturnKaijuuToLandAnimation : MonoBehaviour
             case "MidKaijuu":
             case "SmallKaijuu":
                 other.gameObject.GetComponent<Animator>().SetTrigger("KaijuuLanded");
+                ScreenShakeController.cam_instance.startShake(0.07f, 0.07f);
                 break;
             default:
                 break;

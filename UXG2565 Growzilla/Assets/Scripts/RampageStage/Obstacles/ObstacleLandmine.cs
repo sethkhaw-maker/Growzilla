@@ -31,6 +31,7 @@ public class ObstacleLandmine : MonoBehaviour
             case "BigKaijuu":
             case "MidKaijuu":
             case "SmallKaijuu":
+                ScreenShakeController.cam_instance.startShake(0.05f, 0.05f);
                 RampageDestructionHandler.Instance.LoseHealth();
                 RampageDestructionHandler.Instance.AddScore(DestructionScore);
                 Debug.Log("Kaijuu Receives Damage from Landmines!");
@@ -41,6 +42,7 @@ public class ObstacleLandmine : MonoBehaviour
                 //Invoke("OnDestroyed", 1.0f);
                 break;
             case "ability_tail_hitbox":
+                ScreenShakeController.cam_instance.startShake(0.05f, 0.05f);
                 RampageDestructionHandler.Instance.AddScore(DestructionScore);
                 Debug.Log("Kaijuu Used Skill to Destroy Landmines!");
                 GetComponent<Animator>().Play("LandmineTrigger");
