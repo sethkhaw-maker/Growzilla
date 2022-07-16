@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class FoodFactory : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class FoodFactory : MonoBehaviour
     [SerializeField] float ConveyorSpeed = 1.0f;
     [SerializeField] float FallingSpeed = 5.0f;
     [SerializeField] AudioSource ChuteReleaseAudio = null;
+    [SerializeField] Text FoodLabel = null;
 
     [HideInInspector] public bool FactoryIsEnabled = true;
 
@@ -19,6 +21,7 @@ public class FoodFactory : MonoBehaviour
     {
         ImplementSingleton();
         FactoryIsEnabled = true;
+        FoodLabel.text = "";
     }
     private void ImplementSingleton()
     {
@@ -77,6 +80,9 @@ public class FoodFactory : MonoBehaviour
             SpawnedObject.GetComponent<FoodScript>().objectType = FoodObjectType.Display;
             SpawnedObject.GetComponent<FoodScript>().moveSpeed = 0.0f;
             foodInChuteObject = SpawnedObject;
+            FoodLabel.text =
+                (SpawnedObject.GetComponent<FoodScript>().foodData.FoodType -1 == 0) ? "HORNS" :
+                (SpawnedObject.GetComponent<FoodScript>().foodData.FoodType -1 == 1) ? "TAIL" : "WINGS";
         }
         else
         {
@@ -92,6 +98,7 @@ public class FoodFactory : MonoBehaviour
     public void DisableFactory()
     {
         if (foodInChuteObject != null) { Destroy(foodInChuteObject); }
+        FoodLabel.text = "";
         FactoryIsEnabled = false;
     }
 }
