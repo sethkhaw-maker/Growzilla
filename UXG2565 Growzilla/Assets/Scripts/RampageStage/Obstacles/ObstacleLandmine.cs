@@ -9,9 +9,12 @@ public class ObstacleLandmine : MonoBehaviour
     [SerializeField] int DestructionScore = 50;
     Rigidbody2D rb2d = null;
 
+    public AudioSource audioSource;
+
     void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        audioSource = GameObject.Find("Explosion").GetComponent<AudioSource>();
     }
 
     void Start()
@@ -38,6 +41,7 @@ public class ObstacleLandmine : MonoBehaviour
                 GetComponent<Animator>().Play("LandmineTrigger");
                 GetComponent<Collider2D>().enabled = false;
                 Instantiate(ExplosionPrefab, this.gameObject.transform.position, Quaternion.identity);
+                audioSource.Play();
                 Destroy(this.gameObject);
                 //Invoke("OnDestroyed", 1.0f);
                 break;
@@ -48,6 +52,7 @@ public class ObstacleLandmine : MonoBehaviour
                 GetComponent<Animator>().Play("LandmineTrigger");
                 GetComponent<Collider2D>().enabled = false;
                 Instantiate(ExplosionPrefab, this.gameObject.transform.position, Quaternion.identity);
+                audioSource.Play();
                 Destroy(this.gameObject);
                 //Invoke("OnDestroyed", 1.0f);
                 break;

@@ -7,9 +7,12 @@ public class ObstacleGenericBuilding : MonoBehaviour
     [SerializeField] int DestructionScore = 25;
     Rigidbody2D rb2d = null;
 
+    public AudioSource audioSource;
+
     void Awake()
     {
-        rb2d = GetComponent<Rigidbody2D>();    
+        rb2d = GetComponent<Rigidbody2D>();
+        audioSource = GameObject.Find("Explosion").GetComponent<AudioSource>();
     }
 
     void Start()
@@ -37,6 +40,7 @@ public class ObstacleGenericBuilding : MonoBehaviour
                 GetComponent<Collider2D>().enabled = false;
                 var temp = Instantiate(ExplosionPrefab, this.gameObject.transform.position, Quaternion.identity);
                 temp.transform.localScale = new Vector3(1, 1, 1);
+                audioSource.Play();
                 Invoke("OnDestroyed", 1.0f);
                 break;
             case "ability_horns_hitbox":
@@ -49,6 +53,7 @@ public class ObstacleGenericBuilding : MonoBehaviour
                 GetComponent<Collider2D>().enabled = false;
                 var temp2 = Instantiate(ExplosionPrefab, this.gameObject.transform.position, Quaternion.identity);
                 temp2.transform.localScale = new Vector3(1, 1, 1);
+                audioSource.Play();
                 Invoke("OnDestroyed", 1.0f);
                 break;
             case "SceneBorders":

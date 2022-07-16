@@ -7,9 +7,12 @@ public class ObstacleBarricade : MonoBehaviour
     [SerializeField] int DestructionScore = 50;
     Rigidbody2D rb2d = null;
 
+    public AudioSource audioSource;
+
     void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        audioSource = GameObject.Find("Explosion").GetComponent<AudioSource>();
     }
 
     void Start()
@@ -36,6 +39,7 @@ public class ObstacleBarricade : MonoBehaviour
                 GetComponent<Animator>().Play("BarricadeTrigger");
                 GetComponent<Collider2D>().enabled = false;
                 Instantiate(ExplosionPrefab, this.gameObject.transform.position, Quaternion.identity);
+                audioSource.Play();
                 Destroy(this.gameObject);
                 //Invoke("OnDestroyed", 1.1f);
                 break;
@@ -46,6 +50,7 @@ public class ObstacleBarricade : MonoBehaviour
                 GetComponent<Animator>().Play("BarricadeTrigger");
                 GetComponent<Collider2D>().enabled = false;
                 Instantiate(ExplosionPrefab, this.gameObject.transform.position, Quaternion.identity);
+                audioSource.Play();
                 Destroy(this.gameObject);
                 //Invoke("OnDestroyed", 1.1f);
                 break;
@@ -56,7 +61,6 @@ public class ObstacleBarricade : MonoBehaviour
                 break;
         }
     }
-
     void OnDestroyed()
     {
         Destroy(this.gameObject);

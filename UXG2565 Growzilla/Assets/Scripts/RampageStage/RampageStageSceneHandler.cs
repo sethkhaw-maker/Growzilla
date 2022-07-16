@@ -46,13 +46,20 @@ public class RampageStageSceneHandler : MonoBehaviour
     [Header("TailAnimation")]
     [SerializeField] GameObject[] TailWithAnimations = null;
 
+    //Audio Sources
+    [SerializeField] AudioSource[] kaijuAudioSources = new AudioSource[5];
+
     void Start()
     {
         OnSceneLoad();
 
         foreach(GameObject GO in KaijuuSizes)
         {
-            if (GO.activeSelf == true) { GO.GetComponent<Animator>().Play("Walk"); }
+            if (GO.activeSelf == true) 
+            { 
+                GO.GetComponent<Animator>().Play("Walk");
+                kaijuAudioSources[4].Play();
+            }
         }
     }
 
@@ -69,12 +76,27 @@ public class RampageStageSceneHandler : MonoBehaviour
         else { if (Input.GetKey(KeyCode.X)) { OnAbility2ButtonPressed(); } }
 
         UseDebugAbilities();
+        PlayingWalkingAudio();
     }
     void UseDebugAbilities()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1)) { ExecuteAbilityHorns(); }
         if (Input.GetKeyDown(KeyCode.Alpha2)) { ExecuteAbilityTail();  }
         if (Input.GetKeyDown(KeyCode.Alpha3)) { ExecuteAbilityWings(); }
+    }
+
+    void PlayingWalkingAudio()
+    {
+        if(kaijuAudioSources[4] != null)
+        {
+            if(kaijuAudioSources[0].isPlaying || kaijuAudioSources[1].isPlaying || kaijuAudioSources[2].isPlaying || kaijuAudioSources[3].isPlaying)
+            {
+                kaijuAudioSources[4].Pause();
+            }
+
+            else { kaijuAudioSources[4].UnPause(); }
+        }
+        else { return; }
     }
     public void OnSceneLoad()
     {
@@ -175,6 +197,7 @@ public class RampageStageSceneHandler : MonoBehaviour
 
     public void DecreaseHealth()
     {
+        kaijuAudioSources[0].Play();
         CurrentHealth = (CurrentHealth > 0) ? CurrentHealth -= 1 : 0;
         ScreenShakeController.cam_instance.startShake(0.07f, 0.07f);
 
@@ -248,6 +271,7 @@ public class RampageStageSceneHandler : MonoBehaviour
         {
             if (go.activeSelf == true)
             {
+                kaijuAudioSources[1].Play();
                 HornsCollisionObject.transform.position = 
                     new Vector3(
                         HornsCollisionObject.transform.position.x,
@@ -264,13 +288,17 @@ public class RampageStageSceneHandler : MonoBehaviour
         }
     }
     void EnableHorns() { HornsCollisionObject.SetActive(true); Invoke("DisableHorns", AbilityDuration); }
-    void DisableHorns() { HornsCollisionObject.SetActive(false); }
+    void DisableHorns() 
+    { 
+        HornsCollisionObject.SetActive(false);
+    }
     private void ExecuteAbilityTail()
     {
         foreach (GameObject go in KaijuuSizes)
         {
             if (go.activeSelf == true)
             {
+                kaijuAudioSources[3].Play();
                 TailCollisionObject.transform.position =
                     new Vector3(
                         TailCollisionObject.transform.position.x,
@@ -288,7 +316,10 @@ public class RampageStageSceneHandler : MonoBehaviour
         }
     }
     void EnableTail() { TailCollisionObject.SetActive(true); Invoke("DisableTail", AbilityDuration); }
-    void DisableTail() { TailCollisionObject.SetActive(false); }
+    void DisableTail() 
+    { 
+        TailCollisionObject.SetActive(false);
+    }
     private void ExecuteAbilityWings()
     {
         foreach(Rigidbody2D rb2d in KaijuuRigidBody)
@@ -301,7 +332,11 @@ public class RampageStageSceneHandler : MonoBehaviour
 
         foreach (GameObject GO in KaijuuSizes)
         {
-            if (GO.activeSelf == true) { GO.GetComponent<Animator>().Play("Jump"); }
+            if (GO.activeSelf == true) 
+            {
+                kaijuAudioSources[2].Play();
+                GO.GetComponent<Animator>().Play("Jump"); 
+            }
         }
     }
 
