@@ -1,14 +1,14 @@
 {
     "Current": {
-        "KaijuuName": "a",
-        "FoodEaten": 22,
+        "KaijuuName": "Morpheus",
+        "FoodEaten": 18,
         "Color": [
-            0.514823317527771,
-            0.7635661959648132,
-            0.3065860867500305
+            0.11343695968389511,
+            0.5751957893371582,
+            0.7975357174873352
         ],
-        "Ability1": "Tail",
-        "Ability2": "Wings",
+        "Ability1": "Horns",
+        "Ability2": "Tail",
         "Destruction": 0,
         "Distance": 0,
         "Score": 0
