@@ -993,7 +993,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 3
-    functionName: PlayAudio2
+    functionName: GoToGrow
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
