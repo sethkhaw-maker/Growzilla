@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -35,6 +36,10 @@ public class GrowStageKaijuuHandler : MonoBehaviour
     Vector3 KaijuuColor = new Vector3(1.0f, 1.0f, 1.0f);
     
     public List<Animator> KaijuAnimators;
+
+    [SerializeField] Text HornsAmount = null;
+    [SerializeField] Text TailAmount = null;
+    [SerializeField] Text WingsAmount = null;
 
 
     // ----------------------------------------------------------
@@ -171,7 +176,12 @@ public class GrowStageKaijuuHandler : MonoBehaviour
 
         // 5. Try Evolve.
         OnKaijuuTryEvolve();
+
+        HornsAmount.text = AbilityGrowth[0].ToString();
+        TailAmount.text = AbilityGrowth[1].ToString();
+        WingsAmount.text = AbilityGrowth[2].ToString();
     }
+    
 
     [SerializeField] GameObject[] MidUpgrades = new GameObject[1];
     [SerializeField] GameObject[] BigUpgrades = new GameObject[1];
