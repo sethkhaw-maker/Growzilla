@@ -9,6 +9,9 @@ public class ScrollingObjectsHandler : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        rb2d.velocity = new Vector2(-ScrollSpeed, 0);
+    }
+    void FixedUpdate()
+    {
+        rb2d.velocity = ScrollSpeed * -Vector2.right * RampageBuildingSpawnGrowth.Instance.SpawnMultiplier;
     }
 }

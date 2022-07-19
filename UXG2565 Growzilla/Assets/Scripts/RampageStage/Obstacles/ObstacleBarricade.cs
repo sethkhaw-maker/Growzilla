@@ -22,7 +22,7 @@ public class ObstacleBarricade : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb2d.velocity = moveSpeed * -Vector2.right;
+        rb2d.velocity = moveSpeed * -Vector2.right * RampageBuildingSpawnGrowth.Instance.SpawnMultiplier;
     }
 
     void OnTriggerEnter2D(Collider2D other)

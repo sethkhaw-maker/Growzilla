@@ -34,7 +34,7 @@ public class ObstacleFactory : MonoBehaviour
     }
     void Update()
     {
-        obstacleMinimumCooldown -= Time.deltaTime;
+        obstacleMinimumCooldown -= Time.deltaTime * RampageBuildingSpawnGrowth.Instance.SpawnMultiplier;
         Obstacle1Tick();
         Obstacle2Tick();
         Obstacle3Tick();
