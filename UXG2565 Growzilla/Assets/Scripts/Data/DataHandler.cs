@@ -21,6 +21,16 @@ public partial class DataHandler : MonoBehaviour
         GetCacheData();
     }
 
+#elif UNITY_WEBGL
+
+    void Awake()
+    {
+        InitialDataPath = Application.persistentDataPath;
+        ImplementSingleton();
+        GetHighscore();
+        GetCacheData();
+    }
+
 #else
 
     void Awake()
