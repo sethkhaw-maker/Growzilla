@@ -94,6 +94,62 @@
             ],
             "Ability1": "Tail",
             "Ability2": "Wings",
+            "Destruction": 25,
+            "Distance": 0,
+            "Score": 0
+        },
+        {
+            "KaijuuName": "suicidal",
+            "FoodEaten": 5,
+            "Color": [
+                0.897599995136261,
+                0.769599974155426,
+                0.800000011920929
+            ],
+            "Ability1": "Tail",
+            "Ability2": "Wings",
+            "Destruction": 0,
+            "Distance": 0,
+            "Score": 0
+        },
+        {
+            "KaijuuName": "suicidal",
+            "FoodEaten": 5,
+            "Color": [
+                0.897599995136261,
+                0.769599974155426,
+                0.800000011920929
+            ],
+            "Ability1": "Tail",
+            "Ability2": "Wings",
+            "Destruction": 0,
+            "Distance": 0,
+            "Score": 0
+        },
+        {
+            "KaijuuName": "suicidal",
+            "FoodEaten": 5,
+            "Color": [
+                0.897599995136261,
+                0.769599974155426,
+                0.800000011920929
+            ],
+            "Ability1": "Tail",
+            "Ability2": "Wings",
+            "Destruction": 0,
+            "Distance": 0,
+            "Score": 0
+        },
+        {
+            "KaijuuName": "suicidal",
+            "FoodEaten": 5,
+            "Color": [
+                0.897599995136261,
+                0.769599974155426,
+                0.800000011920929
+            ],
+            "Ability1": "Tail",
+            "Ability2": "Wings",
             "Destruction": 0,
             "Distance": 0,
             "Score": 0
