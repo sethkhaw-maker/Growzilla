@@ -1,3 +1,102 @@
 {
-    "Highscore": []
+    "Highscore": [
+        {
+            "KaijuuName": "BIG PP ENERGY",
+            "FoodEaten": 21,
+            "Color": [
+                0.31229299306869509,
+                0.8616047501564026,
+                0.2616167664527893
+            ],
+            "Ability1": "Horns",
+            "Ability2": "Wings",
+            "Destruction": 525,
+            "Distance": 0,
+            "Score": 0
+        },
+        {
+            "KaijuuName": "bigredone",
+            "FoodEaten": 16,
+            "Color": [
+                0.8087261915206909,
+                0.4110477864742279,
+                0.37613773345947268
+            ],
+            "Ability1": "Horns",
+            "Ability2": "Tail",
+            "Destruction": 475,
+            "Distance": 0,
+            "Score": 0
+        },
+        {
+            "KaijuuName": "BananaaHorns",
+            "FoodEaten": 11,
+            "Color": [
+                0.7980962991714478,
+                0.9207276105880737,
+                0.30737417936325076
+            ],
+            "Ability1": "Horns",
+            "Ability2": "Wings",
+            "Destruction": 450,
+            "Distance": 0,
+            "Score": 0
+        },
+        {
+            "KaijuuName": "midsizething",
+            "FoodEaten": 14,
+            "Color": [
+                0.578559398651123,
+                0.46328747272491457,
+                0.3645551800727844
+            ],
+            "Ability1": "Tail",
+            "Ability2": "Wings",
+            "Destruction": 275,
+            "Distance": 0,
+            "Score": 0
+        },
+        {
+            "KaijuuName": "Bigbluescout",
+            "FoodEaten": 19,
+            "Color": [
+                0.21594052016735078,
+                0.4581105709075928,
+                0.7825002074241638
+            ],
+            "Ability1": "Horns",
+            "Ability2": "Wings",
+            "Destruction": 250,
+            "Distance": 0,
+            "Score": 0
+        },
+        {
+            "KaijuuName": "Mummy",
+            "FoodEaten": 19,
+            "Color": [
+                0.5444559454917908,
+                0.6737319231033325,
+                0.22217190265655518
+            ],
+            "Ability1": "Horns",
+            "Ability2": "Wings",
+            "Destruction": 225,
+            "Distance": 0,
+            "Score": 0
+        },
+        {
+            "KaijuuName": "suicidal",
+            "FoodEaten": 5,
+            "Color": [
+                0.897599995136261,
+                0.769599974155426,
+                0.800000011920929
+            ],
+            "Ability1": "Tail",
+            "Ability2": "Wings",
+            "Destruction": 0,
+            "Distance": 0,
+            "Score": 0
+        }
+    ]
 }

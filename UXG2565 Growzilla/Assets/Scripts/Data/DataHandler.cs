@@ -37,7 +37,7 @@ public partial class DataHandler : MonoBehaviour
     {
         InitialDataPath = Application.dataPath;
         ImplementSingleton();
-        GetHighscore();
+        //GetHighscore();
         GetCacheData();
     }
 
@@ -110,6 +110,20 @@ public partial class DataHandler : MonoBehaviour
         {
             ResetHighScore();
         }
+    }
+    public DynamicData ReadHighScore()
+    {
+        GetHighscore();
+        return scoreData;
+    }
+    public void SetHighScore(DynamicData arg_Highscore)
+    {
+        scoreData = arg_Highscore;
+        Debug.Log(InitialDataPath + "/ScoreData.json");
+        if (scoreData.Highscore.Count > 0) { scoreData.Highscore.Sort(); }
+        string dynJson = JsonUtility.ToJson(scoreData, true);
+        string dynPath = InitialDataPath + "/ScoreData.json";
+        File.WriteAllText(dynPath, dynJson);
     }
     public void ResetHighScore()
     {

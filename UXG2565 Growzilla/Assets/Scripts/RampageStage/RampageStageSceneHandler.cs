@@ -77,6 +77,8 @@ public class RampageStageSceneHandler : MonoBehaviour
 
         UseDebugAbilities();
         PlayingWalkingAudio();
+
+        //if (Input.GetKeyDown(KeyCode.R)) { OnReturnToGrowButtonPressed(); }
     }
     void UseDebugAbilities()
     {
@@ -107,6 +109,12 @@ public class RampageStageSceneHandler : MonoBehaviour
         Ability2 = CurrentData.Current.Ability2;
 
         int currentSize = (CurrentData.Current.FoodEaten <= 8) ? 0 : (CurrentData.Current.FoodEaten <= 15) ? 1 : 2;
+
+        if (currentSize == 0)
+        {
+            Ability1Button.gameObject.SetActive(false);
+            Ability2Button.gameObject.SetActive(false);
+        }
 
         foreach(GameObject go in KaijuuSizes) { go.SetActive(false); }
 
@@ -222,6 +230,10 @@ public class RampageStageSceneHandler : MonoBehaviour
     [SerializeField] GameObject ExplosionPrefab = null;
     [SerializeField] GameObject PlaceholderGameoverText = null;
     [SerializeField] GameObject LoadingScreen = null;
+
+    [SerializeField] GameObject HighscoreObject = null;
+    [SerializeField] Text[] KaijuuName;
+    [SerializeField] Text[] KaijuuScore;
     public void OnGameOver()
     {
         var temp = Instantiate(ExplosionPrefab, KaijuuObject.transform.position, Quaternion.identity);
@@ -232,10 +244,46 @@ public class RampageStageSceneHandler : MonoBehaviour
                 KaijuuObject.transform.position.y + 1000.0f,
                 KaijuuObject.transform.position.z
                 );
-        PlaceholderGameoverText.SetActive(true);
+        //PlaceholderGameoverText.SetActive(true);
+        //Invoke("ReturnToGrowScene", 1.0f);
+
+
+        HighscoreObject.SetActive(true);
+        int getScore = RampageDestructionHandler.Instance.CurrentScore;
+        CacheData CurrentData = DataHandler.Instance.ReadCacheData();
+
+        CurrentData.Current.Destruction = getScore;
+        DataHandler.Instance.InputCacheData(CurrentData);
+
+        var temp2 = DataHandler.Instance.ReadHighScore();
+        temp2.Highscore.Add(CurrentData.Current);
+
+        CurrentData = null;
+
+        int iterationLimit = (temp2.Highscore.Count < 5) ? temp2.Highscore.Count : 5;
+
+        DataHandler.Instance.SetHighScore(temp2);
+
+        temp2.Highscore.Sort();
+
+        for (int iL = 0; iL < iterationLimit; iL++)
+        {
+            KaijuuName[iL].text = (iL + 1).ToString() + ": " + temp2.Highscore[iL].KaijuuName;
+            KaijuuScore[iL].text = "SCORE: " +  temp2.Highscore[iL].Destruction.ToString();
+        }
+
+        KaijuuObject.SetActive(false);
+    }
+
+    public void OnReturnToGrowButtonPressed()
+    {
         Invoke("ReturnToGrowScene", 1.0f);
     }
-    public void ReturnToGrowScene() { LoadingScreen.GetComponent<Animator>().Play("ToMainMenu"); }
+    public void ReturnToGrowScene()
+    {
+        HighscoreObject.SetActive(false);
+        LoadingScreen.GetComponent<Animator>().Play("ToMainMenu");
+    }
     // Button Input
     public void OnAbility1ButtonPressed()
     {

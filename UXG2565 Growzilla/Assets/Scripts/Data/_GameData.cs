@@ -18,10 +18,10 @@ public class KaijuuData : IComparable<KaijuuData>
 
     public int CompareTo(KaijuuData other)
     {
-        if (this.Score > other.Score)
-            return 1;
-        else if (this.Score < other.Score)
+        if (this.Destruction > other.Destruction)
             return -1;
+        else if (this.Destruction < other.Destruction)
+            return 1;
         else
             return 0;
     }
