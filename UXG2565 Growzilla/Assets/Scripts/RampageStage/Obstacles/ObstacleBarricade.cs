@@ -35,7 +35,8 @@ public class ObstacleBarricade : MonoBehaviour
                 ScreenShakeController.cam_instance.startShake(0.05f, 0.05f);
                 RampageDestructionHandler.Instance.LoseHealth();
                 RampageDestructionHandler.Instance.AddScore(DestructionScore);
-                Debug.Log("Kaijuu Receives Damage from Barricade!");
+                DamageVignetteHandler.Instance.OnDamageShowVignette();
+                //Debug.Log("Kaijuu Receives Damage from Barricade!");
                 GetComponent<Animator>().Play("BarricadeTrigger");
                 GetComponent<Collider2D>().enabled = false;
                 Instantiate(ExplosionPrefab, this.gameObject.transform.position, Quaternion.identity);

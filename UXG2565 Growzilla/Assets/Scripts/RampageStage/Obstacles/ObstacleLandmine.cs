@@ -37,7 +37,8 @@ public class ObstacleLandmine : MonoBehaviour
                 ScreenShakeController.cam_instance.startShake(0.05f, 0.05f);
                 RampageDestructionHandler.Instance.LoseHealth();
                 RampageDestructionHandler.Instance.AddScore(DestructionScore);
-                Debug.Log("Kaijuu Receives Damage from Landmines!");
+                DamageVignetteHandler.Instance.OnDamageShowVignette();
+                //Debug.Log("Kaijuu Receives Damage from Landmines!");
                 GetComponent<Animator>().Play("LandmineTrigger");
                 GetComponent<Collider2D>().enabled = false;
                 Instantiate(ExplosionPrefab, this.gameObject.transform.position, Quaternion.identity);

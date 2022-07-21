@@ -35,7 +35,8 @@ public class ObstacleGenericBuilding : MonoBehaviour
                 ScreenShakeController.cam_instance.startShake(0.05f, 0.05f);
                 RampageDestructionHandler.Instance.LoseHealth();
                 RampageDestructionHandler.Instance.AddScore(DestructionScore);
-                Debug.Log("Kaijuu Receives Damage from Buildings!");
+                DamageVignetteHandler.Instance.OnDamageShowVignette();
+                //Debug.Log("Kaijuu Receives Damage from Buildings!");
                 GetComponent<Animator>().Play("Building1Destroyed");
                 GetComponent<Collider2D>().enabled = false;
                 var temp = Instantiate(ExplosionPrefab, this.gameObject.transform.position, Quaternion.identity);
