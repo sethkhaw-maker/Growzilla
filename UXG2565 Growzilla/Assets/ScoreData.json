@@ -1,6 +1,20 @@
 {
     "Highscore": [
         {
+            "KaijuuName": "UXG 2565",
+            "FoodEaten": 22,
+            "Color": [
+                0.49641698598861697,
+                0.6218830347061157,
+                0.22697094082832337
+            ],
+            "Ability1": "Horns",
+            "Ability2": "Tail",
+            "Destruction": 5350,
+            "Distance": 0,
+            "Score": 0
+        },
+        {
             "KaijuuName": "BIG PP ENERGY",
             "FoodEaten": 21,
             "Color": [
